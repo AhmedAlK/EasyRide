@@ -1,6 +1,9 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">EasyRide</string>
 
-    <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+
+    <string name="title_activity_edit__bio">Edit Bio</string>
+
+    <string name="user_name">Unnamed</string>
 </resources>
