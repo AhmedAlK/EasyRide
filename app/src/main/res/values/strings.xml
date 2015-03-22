@@ -6,4 +6,8 @@
     <string name="title_activity_edit__bio">Edit Bio</string>
 
     <string name="user_name">Unnamed</string>
+    <string name="title_activity_role_select">role_select</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_waiting">Waiting</string>
 </resources>
