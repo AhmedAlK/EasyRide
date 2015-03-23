@@ -3,6 +3,7 @@ package slickstring.myapplication;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 
 
@@ -13,7 +14,6 @@ public class Waiting extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_waiting);
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -29,10 +29,6 @@ public class Waiting extends ActionBarActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
 
         return super.onOptionsItemSelected(item);
     }

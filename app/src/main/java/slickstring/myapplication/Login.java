@@ -1,12 +1,18 @@
 package slickstring.myapplication;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
 
 
-public class Login extends ActionBarActivity {
+public class Login extends Activity {
+
+    public final static String EXTRA_MESSAGE = "slickstring.myapplication.email";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,11 +35,14 @@ public class Login extends ActionBarActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
         return super.onOptionsItemSelected(item);
+    }
+
+    public void verifyLogin(View view){
+        Intent intent = new Intent(this, edit_bio.class);
+        EditText editText = (EditText) findViewById(R.id.emailInput);
+        String email = editText.getText().toString();
+        intent.putExtra(EXTRA_MESSAGE, email);
+        startActivity(intent);
     }
 }
