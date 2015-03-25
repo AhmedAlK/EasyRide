@@ -1,10 +1,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="slickstring.myapplication.waiting">
+    tools:context="slickstring.myapplication.edit_profile">
 
-    <item android:id="@+id/action_profile"
-        android:title="@string/action_profile"
+    <item android:id="@+id/action_save"
+        android:title="save"
         android:orderInCategory="100"
         app:showAsAction="ifRoom" />
 </menu>

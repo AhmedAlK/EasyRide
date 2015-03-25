@@ -35,7 +35,7 @@
         android:id="@+id/button3"
         android:layout_marginTop="65dp"
         android:layout_below="@+id/textView"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"/>
 
     <Button
         android:layout_width="wrap_content"

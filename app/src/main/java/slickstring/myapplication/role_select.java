@@ -39,6 +39,6 @@ public class role_select extends ActionBarActivity {
         }
 
     public void openProfile(){
-        startActivity( new Intent(this, edit_bio.class));
+        startActivity( new Intent(this, create_bio.class));
     }
 }

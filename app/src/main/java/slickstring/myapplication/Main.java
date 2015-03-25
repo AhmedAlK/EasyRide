@@ -1,24 +1,39 @@
 package slickstring.myapplication;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 
 
-public class waiting extends ActionBarActivity {
+public class Main extends ActionBarActivity {
+
+    public boolean loggedIn = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_waiting);
+        setContentView(R.layout.activity_main);
+        Intent intent;
+        if (loggedIn){
+            intent = new Intent(this, role_select.class);
+        }
+        else {
+            intent = new Intent(this, login.class);
+        }
+        startActivity(intent);
+    }
+
+    private void toRoles(){
+        Intent intent = new Intent();
+
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_waiting, menu);
+        getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
@@ -29,6 +44,10 @@ public class waiting extends ActionBarActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
 
         return super.onOptionsItemSelected(item);
     }

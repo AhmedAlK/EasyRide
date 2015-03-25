@@ -2,7 +2,6 @@ package slickstring.myapplication;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -10,16 +9,16 @@ import android.view.View;
 import android.widget.EditText;
 
 
-public class Login extends Activity {
+public class login extends Activity {
 
     public final static String EXTRA_MESSAGE = "slickstring.myapplication.email";
+    public static String email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -39,9 +38,9 @@ public class Login extends Activity {
     }
 
     public void verifyLogin(View view){
-        Intent intent = new Intent(this, edit_bio.class);
+        Intent intent = new Intent(this, create_bio.class);
         EditText editText = (EditText) findViewById(R.id.emailInput);
-        String email = editText.getText().toString();
+        email = editText.getText().toString();
         intent.putExtra(EXTRA_MESSAGE, email);
         startActivity(intent);
     }

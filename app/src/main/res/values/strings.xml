@@ -15,4 +15,10 @@
     <string name="title_activity_main">main</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="title_activity_edit_profile">edit_profile</string>
+    <string name="title_activity_conversations">Conversations</string>
+    <string name="title_activity_driver_message">driver_message</string>
+    <string name="title_activity_list_drivers">list_drivers</string>
+    <string name="title_activity_passenger_message">passenger_message</string>
+    <string name="title_activity_view_profile">view_profile</string>
 </resources>
