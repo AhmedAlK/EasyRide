@@ -1,17 +1,19 @@
 package slickstring.myapplication;
 
+import android.app.Activity;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
 
-public class list_drivers extends ActionBarActivity {
+public class list_drivers extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_drivers);
+        getActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
 

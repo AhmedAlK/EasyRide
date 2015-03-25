@@ -14,19 +14,9 @@
         android:text="I am a..."
         android:id="@+id/textView"
         android:layout_gravity="center_vertical"
-        android:layout_below="@+id/button2"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="42dp" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Profile"
-        android:id="@+id/button2"
-        android:layout_gravity="top"
+        android:layout_marginTop="43dp"
         android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:layout_width="wrap_content"
@@ -35,7 +25,8 @@
         android:id="@+id/button3"
         android:layout_marginTop="65dp"
         android:layout_below="@+id/textView"
-        android:layout_centerHorizontal="true"/>
+        android:layout_centerHorizontal="true"
+        android:onClick="amDriver"/>
 
     <Button
         android:layout_width="wrap_content"
@@ -44,7 +35,8 @@
         android:id="@+id/button4"
         android:layout_marginTop="77dp"
         android:layout_below="@+id/button3"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:onClick="amPassenger"/>
 
 
 </RelativeLayout>

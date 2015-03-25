@@ -1,20 +1,21 @@
 package slickstring.myapplication;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 
-public class role_select extends ActionBarActivity {
+public class role_select extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_role_select);
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -39,6 +40,14 @@ public class role_select extends ActionBarActivity {
         }
 
     public void openProfile(){
-        startActivity( new Intent(this, create_bio.class));
+        startActivity( new Intent(this, edit_profile.class));
+    }
+
+    public void amDriver(View view){
+        startActivity( new Intent(this, waiting.class));
+    }
+
+    public void amPassenger(View view){
+        startActivity( new Intent(this, list_drivers.class));
     }
 }

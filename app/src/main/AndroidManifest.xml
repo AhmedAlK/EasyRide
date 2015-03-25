@@ -24,7 +24,6 @@
             android:theme="@style/FullscreenTheme" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -48,15 +47,6 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="slickstring.myapplication.role_select" />
-        </activity>
-        <activity
-            android:name=".Main"
-            android:label="@string/title_activity_main" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".edit_profile"

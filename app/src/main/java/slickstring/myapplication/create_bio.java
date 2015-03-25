@@ -2,16 +2,17 @@
 package slickstring.myapplication;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 
 public class create_bio extends Activity {
 
-    String myUserName;
-
+    String myUserName = "uninitialized";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,7 +21,6 @@ public class create_bio extends Activity {
         myUserName = getIntent().getStringExtra(login.email);
         ((TextView) findViewById(R.id.userName)).setText(myUserName);
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -37,8 +37,9 @@ public class create_bio extends Activity {
         int id = item.getItemId();
 
         switch (item.getItemId()) {
-            case R.id.action_save:
+            case R.id.action_next:
                 saveProfile();
+                next();
         }
 
         return super.onOptionsItemSelected(item);
@@ -48,4 +49,8 @@ public class create_bio extends Activity {
 //            startActivity( new Intent(this, create_bio.class));
     }
 
+    public void next(){
+        Intent intent = new Intent(this, role_select.class);
+        startActivity(intent);
+    }
 }

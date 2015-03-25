@@ -1,19 +1,21 @@
 package slickstring.myapplication;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 
-public class edit_profile extends ActionBarActivity {
+public class edit_profile extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -36,4 +38,5 @@ public class edit_profile extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
 }
