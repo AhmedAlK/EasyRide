@@ -42,13 +42,14 @@ public class passenger_message extends Activity {
     }
 
     public void requestedRide(View view){
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                // User cancelled the dialog
+        AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+        alertDialog.setMessage("You have requested a ride");
+        alertDialog.setButton("cancel",new DialogInterface.OnClickListener(){
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //
             }
         });
-        builder.setMessage("You have requested a ride");
-        AlertDialog dialog = builder.create();
+        alertDialog.show();
     }
 }
