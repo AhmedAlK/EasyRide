@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.LinearLayout;
 
 
 public class waiting extends Activity {
@@ -14,7 +17,7 @@ public class waiting extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_waiting);
-        getActionBar().setDisplayHomeAsUpEnabled(true);
+        messageButtonCreator(findViewById(R.id.messageListLayout));
     }
 
     @Override
@@ -33,5 +36,17 @@ public class waiting extends Activity {
 
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void messageButtonCreator(final View view){
+        final Button button = new Button(this);
+        button.setText("Press Me");
+        button.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                messageButtonCreator(view);
+            }
+        });
+        LinearLayout layout = (LinearLayout) view;
+        layout.addView(button);
     }
 }

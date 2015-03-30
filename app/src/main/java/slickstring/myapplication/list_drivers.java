@@ -1,10 +1,14 @@
 package slickstring.myapplication;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.LinearLayout;
 
 
 public class list_drivers extends Activity {
@@ -13,7 +17,7 @@ public class list_drivers extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_drivers);
-        getActionBar().setDisplayHomeAsUpEnabled(true);
+        driverButtonCreator(findViewById(R.id.driverListLayout));
     }
 
 
@@ -37,5 +41,17 @@ public class list_drivers extends Activity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void driverButtonCreator(final View view){
+        final Button button = new Button(this);
+        button.setText("Press Me");
+        button.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                startActivity(new Intent(view.getContext(), passenger_message.class));
+            }
+        });
+        LinearLayout layout = (LinearLayout) findViewById(R.id.driverListLayout);
+        layout.addView(button);
     }
 }

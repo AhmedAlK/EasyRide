@@ -1,12 +1,16 @@
 package slickstring.myapplication;
 
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 
-public class passenger_message extends ActionBarActivity {
+public class passenger_message extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,5 +39,16 @@ public class passenger_message extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void requestedRide(View view){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                // User cancelled the dialog
+            }
+        });
+        builder.setMessage("You have requested a ride");
+        AlertDialog dialog = builder.create();
     }
 }
