@@ -9,17 +9,22 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import D5.Control;
+
 
 public class create_bio extends Activity {
 
-    String myUserName = "uninitialized";
+    public final static String controller_key = "slickstring.myapplication.controller";
+    String UserName = "Error: no UserName";
+    public Control controller;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_bio);
-        myUserName = getIntent().getStringExtra(login.email);
-        ((TextView) findViewById(R.id.userName)).setText(myUserName);
+        controller = (Control) getIntent().getSerializableExtra(controller_key);
+        UserName = controller.getUserName();
+        ((TextView) findViewById(R.id.userName)).setText(UserName);
     }
 
     @Override
