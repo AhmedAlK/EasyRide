@@ -1,17 +1,33 @@
 package slickstring.myapplication;
 
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
+
+import D5.Control;
 
 
-public class driver_message extends ActionBarActivity {
+public class driver_message extends Activity {
+
+    public final static String controller_key = "slickstring.myapplication.controller";
+    public final static String message_key = "slickstring.myapplication.message";
+    public static Control controller;
+    public static String otherUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_driver_message);
+        controller = (Control) getIntent().getSerializableExtra(controller_key);
+        otherUser = getIntent().getStringExtra(message_key);
+        refreshConversation();
     }
 
 
@@ -35,5 +51,33 @@ public class driver_message extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void Riderequested(View view){
+        AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+        alertDialog.setMessage(otherUser + " has requested a ride");
+        alertDialog.setButton("cancel",new DialogInterface.OnClickListener(){
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                controller.denyInvite();
+            }
+        });
+        alertDialog.setButton("accept",new DialogInterface.OnClickListener(){
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                controller.acceptInvite(otherUser);
+            }
+        });
+        alertDialog.show();
+    }
+
+    public void sendMessage(View view){
+        EditText editText = (EditText) findViewById(R.id.messageText);
+        controller.passengerSend(editText.getText().toString(),otherUser);
+        refreshConversation();
+    }
+
+    public void refreshConversation(){
+        ((TextView) findViewById(R.id.conversationView)).setText(controller.printConvo(controller.getUserName(), otherUser));
     }
 }

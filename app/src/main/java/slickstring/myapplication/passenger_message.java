@@ -26,9 +26,8 @@ public class passenger_message extends Activity {
         setContentView(R.layout.activity_passenger_message);
         controller = (Control) getIntent().getSerializableExtra(controller_key);
         otherUser = getIntent().getStringExtra(message_key);
-        //refreshConversation();
+        refreshConversation();
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -58,16 +57,17 @@ public class passenger_message extends Activity {
         alertDialog.setButton("cancel",new DialogInterface.OnClickListener(){
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                //controller.cancelInvite(otherUser);
+                controller.cancelInvite(otherUser);
             }
         });
         alertDialog.show();
-        //controller.sendInvite(otherUser);
+        controller.sendInvite(otherUser);
     }
 
     public void sendMessage(View view){
         EditText editText = (EditText) findViewById(R.id.messageText);
         controller.passengerSend(editText.getText().toString(),otherUser);
+        refreshConversation();
     }
 
     public void refreshConversation(){

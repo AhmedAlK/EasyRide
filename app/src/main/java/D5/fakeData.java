@@ -1,8 +1,6 @@
 package D5;
 
-import java.io.Serializable;
-
-public class fakeData implements Serializable {
+public class fakeData{
 	private user anne;
 	private user frank;
 	private user ahmed;
@@ -16,7 +14,7 @@ public class fakeData implements Serializable {
 	
 	
 	public fakeData(userArray uArray){
-		anne = new user();
+		anne = new user();											//creating fake users with names, bios, ratings, and roles
 		frank = new user();
 		ahmed= new user();
 		michelle= new user();
@@ -29,7 +27,7 @@ public class fakeData implements Serializable {
 		brandon.setName("Brandon");
 		
 		anne.setBio("Hey I'm Anne");
-		frank.setBio("I like cars");
+		frank.setBio("I like to drink");
 		ahmed.setBio("I'll drive you anywhere :)");
 		michelle.setBio("I charge 20 bucks");
 		brandon.setBio("Wassup Imma drive u all ovr");
@@ -46,13 +44,13 @@ public class fakeData implements Serializable {
 		michelle.setDriver();
 		brandon.setDriver();
 		
-		anneC = new Control(anne, uArray);
+		anneC = new Control(anne, uArray);											//creating controllers for each fake person
 		frankC = new Control(frank, uArray);
 		ahmedC = new Control(ahmed, uArray);
 		michelleC = new Control(michelle, uArray);
 		brandonC = new Control(brandon, uArray);
 		
-		anneC.loginButton(anne.getName(), "");
+		anneC.loginButton(anne.getName(), "");									//logging them all in
 		frankC.loginButton(frank.getName(), "");
 		ahmedC.loginButton(ahmed.getName(), "");
 		michelleC.loginButton(michelle.getName(), "");
@@ -60,13 +58,27 @@ public class fakeData implements Serializable {
 		
 	}
 	
-	public void fakeDriver(String name){
+	public void fakeDriver(String name){										//when you become a driver, they all message you
 		 anneC.passengerSend("Hey!", name);
 		 frankC.passengerSend("Watsup ;)", name);
-		 frankC.sendInvite(name);
+		 frankC.sendInvite(name);													//Frank likes you, wants you to drive him
+	}	
+	
+	public void fakePassenger(String name){										//when you become a passenger, they will all accept to drive you
+		if(ahmed.getInvite() == true){
+			ahmedC.acceptInvite(name);
+		}
+		
+		if(michelle.getInvite() == true){
+			michelleC.acceptInvite(name);
+		}
+		
+		if(brandon.getInvite() == true){
+			brandonC.acceptInvite(name);
+		}
 	}
 	
-	public void fakePassenger(String name){
-		
+	public void fakeEndRide(user name){
+		name.addRating(3.5);
 	}
 }

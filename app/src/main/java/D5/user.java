@@ -1,11 +1,10 @@
 package D5;
 
-import java.io.Serializable;
-
-public class user implements Serializable {
+public class user {
 	
 	private String name;
 	private int id;
+	private String password;
 	private double rating;
 	private int numRatings;
 	private String bio;
@@ -20,6 +19,7 @@ public class user implements Serializable {
 		name = "";
 		id = 0;           //we can use something else for IDs later, an int works for now, start at 0 and add 1 for each user
 		rating = 0;
+		password = "";
 		bio = "";
 		numRatings = 0;
 		isDriver = false;
@@ -29,6 +29,14 @@ public class user implements Serializable {
 		inRide = false;
 	}
 	
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 	public void setName(String name){
 		this.name = name;
 	}

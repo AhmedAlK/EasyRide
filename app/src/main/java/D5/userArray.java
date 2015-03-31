@@ -1,9 +1,8 @@
 package D5;
 
-import java.io.Serializable;
 import java.util.*;
 
-public class userArray implements Serializable {
+public class userArray{
 
    private user[] uArray = new user[500];         //Array of 500 because this app won't go live
    private List<user> driverList = new ArrayList<user>();      //ArrayList for drivers because it's easier
@@ -31,27 +30,20 @@ public class userArray implements Serializable {
       int counter = id;
       
       uArray[id] = null;                                 //remove user from Array
-      while(uArray[counter] != null){                //Move all users after removed user down a slot
+      while(uArray[counter+1] != null){                //Move all users after removed user down a slot
          uArray[counter] = uArray[counter + 1];
          uArray[counter+1].setID(counter);              //set new user's ID's
          counter++;
       }
+      uArray[counter] = null;							//delete end user who was duplicated
    }
    
    public void addDriver(user newDriver){
       driverList.add(newDriver);                            //add drivers id to driver list
    }
    
-   public void removeDriver(user exDriver){
-      driverList.remove(exDriver);                         //remove Driver
-   }
-
    public void addPassenger(user newPassenger){
-      driverList.add(newPassenger);                            //add passengers id to passenger list
-   }
-   
-   public void removePassenger(user exPassenger){
-      driverList.remove(exPassenger);                          //remove passenger
+      passengerList.add(newPassenger);                            //add passengers id to passenger list
    }
    
    public user[] getUsers(){											//gets the array of users

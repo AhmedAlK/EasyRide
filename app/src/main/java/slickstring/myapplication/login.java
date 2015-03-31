@@ -7,8 +7,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
-import D5.*;
+import D5.Control;
 
 
 public class login extends Activity {
@@ -42,14 +43,16 @@ public class login extends Activity {
     public void verifyLogin(View view){
         EditText email = (EditText) findViewById(R.id.emailInput);
         EditText password = (EditText) findViewById(R.id.passwordInput);
-        controller.loginButton(email.getText().toString(),password.getText().toString());
+        if (controller.loginButton(email.getText().toString(),password.getText().toString())){
+            Bundle bundle = new Bundle();
+            bundle.putSerializable(controller_key, controller);
 
-
-        Bundle bundle = new Bundle();
-        bundle.putSerializable(controller_key, controller);
-
-        Intent intent = new Intent(this, create_bio.class);
-        intent.putExtras(bundle);
-        startActivity(intent);
+            Intent intent = new Intent(this, create_bio.class);
+            intent.putExtras(bundle);
+            startActivity(intent);
+        }
+        else{
+            ((TextView) findViewById(R.id.warningView)).setText("Invalid username or password");
+        }
     }
 }

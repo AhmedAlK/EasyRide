@@ -70,4 +70,13 @@
         android:layout_alignParentEnd="true"
         android:onClick="verifyLogin"/>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:id="@+id/warningView"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:textColor="@android:color/holo_red_light" />
+
 </RelativeLayout>

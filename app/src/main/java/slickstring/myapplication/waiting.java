@@ -1,23 +1,32 @@
 package slickstring.myapplication;
 
 import android.app.Activity;
-import android.support.v7.app.ActionBarActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import D5.Control;
+
+import static android.os.SystemClock.sleep;
 
 
 public class waiting extends Activity {
+
+    public final static String controller_key = "slickstring.myapplication.controller";
+    public final static String message_key = "slickstring.myapplication.message";
+    public static Control controller;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_waiting);
-        messageButtonCreator(findViewById(R.id.messageListLayout));
+        controller = (Control) getIntent().getSerializableExtra(controller_key);
+        autoRefresh();
     }
 
     @Override
@@ -38,15 +47,37 @@ public class waiting extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void messageButtonCreator(final View view){
+    public void autoRefresh(){
+        int currentMessages = 0;
+        String[] passengers;
+        while(true){
+            sleep(5000);
+            passengers = controller.getPassengers();
+            if (passengers.length > currentMessages){
+                for (int i = currentMessages; i < passengers.length;i++){
+                    messagesButtonCreator(passengers[i]);
+                }
+                currentMessages = passengers.length;
+            }
+        }
+    }
+
+    public void messagesButtonCreator(final String passengerName){
+        ((TextView) findViewById(R.id.waitingView)).setText("");
+        final LinearLayout layout = (LinearLayout) findViewById(R.id.messageListLayout);
         final Button button = new Button(this);
-        button.setText("Press Me");
+        button.setText(passengerName);
         button.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-                messageButtonCreator(view);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable(controller_key, controller);
+                bundle.putString(message_key,passengerName);
+
+                Intent intent = new Intent(layout.getContext(), driver_message.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
             }
         });
-        LinearLayout layout = (LinearLayout) view;
         layout.addView(button);
     }
 }
