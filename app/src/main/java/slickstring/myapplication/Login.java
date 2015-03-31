@@ -7,14 +7,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+
 import D5.*;
 
 
 public class login extends Activity {
 
     public final static String controller_key = "slickstring.myapplication.controller";
-    public static String email;
-    public Control controller;
+    public static Control controller = new Control();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,11 +40,15 @@ public class login extends Activity {
     }
 
     public void verifyLogin(View view){
-        Intent intent = new Intent(this, create_bio.class);
-        EditText editText = (EditText) findViewById(R.id.emailInput);
-        controller.setUserName(editText.getText().toString());
+        EditText email = (EditText) findViewById(R.id.emailInput);
+        EditText password = (EditText) findViewById(R.id.passwordInput);
+        controller.loginButton(email.getText().toString(),password.getText().toString());
+
+
         Bundle bundle = new Bundle();
         bundle.putSerializable(controller_key, controller);
+
+        Intent intent = new Intent(this, create_bio.class);
         intent.putExtras(bundle);
         startActivity(intent);
     }

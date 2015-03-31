@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import D5.Control;
@@ -15,16 +16,14 @@ import D5.Control;
 public class create_bio extends Activity {
 
     public final static String controller_key = "slickstring.myapplication.controller";
-    String UserName = "Error: no UserName";
-    public Control controller;
+    public static Control controller;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_bio);
         controller = (Control) getIntent().getSerializableExtra(controller_key);
-        UserName = controller.getUserName();
-        ((TextView) findViewById(R.id.userName)).setText(UserName);
+        ((TextView) findViewById(R.id.userName)).setText(controller.getUserName());
     }
 
     @Override
@@ -43,19 +42,22 @@ public class create_bio extends Activity {
 
         switch (item.getItemId()) {
             case R.id.action_next:
-                saveProfile();
                 next();
+                break;
         }
 
         return super.onOptionsItemSelected(item);
     }
 
-    public void saveProfile(){
-//            startActivity( new Intent(this, create_bio.class));
-    }
-
     public void next(){
+        String newBio = ((EditText) findViewById(R.id.BioField)).getText().toString();
+        controller.editBioButton(newBio);
+
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(controller_key, controller);
+
         Intent intent = new Intent(this, role_select.class);
+        intent.putExtras(bundle);
         startActivity(intent);
     }
 }

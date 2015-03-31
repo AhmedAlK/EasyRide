@@ -10,16 +10,30 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
+import D5.Control;
+
 
 public class list_drivers extends Activity {
+
+    public final static String controller_key = "slickstring.myapplication.controller";
+    public final static String message_key = "slickstring.myapplication.message";
+    public static Control controller;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_drivers);
-        driverButtonCreator(findViewById(R.id.driverListLayout));
-    }
+        controller = (Control) getIntent().getSerializableExtra(controller_key);
+//        String[] drivers = controller.getDrivers();
+        String[] drivers = new String[3];
+        drivers[0] = "dave";
+        drivers[1] = "allison";
+        drivers[2] = "chuck";
 
+        for (String s: drivers){
+            driverButtonCreator(s);
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -43,15 +57,21 @@ public class list_drivers extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void driverButtonCreator(final View view){
+    public void driverButtonCreator(final String driverName){
+        final LinearLayout layout = (LinearLayout) findViewById(R.id.driverListLayout);
         final Button button = new Button(this);
-        button.setText("Press Me");
+        button.setText(driverName);
         button.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-                startActivity(new Intent(view.getContext(), passenger_message.class));
+                Bundle bundle = new Bundle();
+                bundle.putSerializable(controller_key, controller);
+                bundle.putString(message_key,driverName);
+
+                Intent intent = new Intent(layout.getContext(), passenger_message.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
             }
         });
-        LinearLayout layout = (LinearLayout) findViewById(R.id.driverListLayout);
         layout.addView(button);
     }
 }

@@ -10,10 +10,10 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
+        android:inputType="textPersonName|textEmailAddress"
         android:ems="10"
         android:id="@+id/emailInput"
-        android:layout_alignBottom="@+id/textView4"
+        android:layout_alignBottom="@+id/titleName"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
@@ -25,14 +25,14 @@
         android:id="@+id/passwordInput"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_alignBottom="@+id/textView5" />
+        android:layout_alignBottom="@+id/titlePassword" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/app_name"
-        android:id="@+id/textView2"
+        android:id="@+id/titleView"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="36dp" />
@@ -41,10 +41,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Email"
-        android:id="@+id/textView4"
+        android:text="Name"
+        android:id="@+id/titleName"
         android:layout_marginBottom="113dp"
-        android:layout_above="@+id/button"
+        android:layout_above="@+id/loginButton"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -52,8 +52,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="password"
-        android:id="@+id/textView5"
+        android:text="Password"
+        android:id="@+id/titlePassword"
         android:layout_below="@+id/emailInput"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
@@ -64,7 +64,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Log In"
-        android:id="@+id/button"
+        android:id="@+id/loginButton"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"

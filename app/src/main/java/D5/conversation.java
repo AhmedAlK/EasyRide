@@ -1,9 +1,11 @@
 package D5;
 
-public class conversation{
+import java.io.Serializable;
+
+public class conversation implements Serializable {
 	
-	private user driver = new user();
-	private user passenger = new user();
+	private user driver;
+	private user passenger;
 	private message head = null;
 	
 	public conversation(user driver, user passenger){						//initiates the driver and passenger users
@@ -40,5 +42,11 @@ public class conversation{
 		return head;									//returns head, might implement to return array or something
 	}
 	
+	public user getDriver(){
+		return driver;
+	}
 	
+	public user getPassenger(){
+		return passenger;
+	}
 }

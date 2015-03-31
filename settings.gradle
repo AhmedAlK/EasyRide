@@ -1,1 +1,1 @@
-include ':app', ':easyridecontroller'
+include ':app'

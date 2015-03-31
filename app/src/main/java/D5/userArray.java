@@ -1,24 +1,29 @@
 package D5;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class userArray{
+public class userArray implements Serializable {
 
    private user[] uArray = new user[500];         //Array of 500 because this app won't go live
    private List<user> driverList = new ArrayList<user>();      //ArrayList for drivers because it's easier
    private List<user> passengerList = new ArrayList<user>();   //ditto ^^
+   private int length = 0;
 
    
    public void addUser(user newUser){
-      int length = 0;
-   
-      length = uArray.length;                     //find spot to put new user in
       uArray[length] = newUser;                     //Put user in
       newUser.setID(length);                        //set ID
+      length++;
    }
    
-   public user findUser(int id){					//probably useless
-      return uArray[id];
+   public user findUser(String userName){
+	   for(int i=0; i < length; i++){
+		   if(uArray[i].getName().equals(userName)){
+			   return uArray[i];
+		   }
+	   }
+	   return null;
    }
    
    public void removeUser(user rUser){				//remove user from userArray
@@ -54,8 +59,9 @@ public class userArray{
    }
    
    public user[] getDrivers(){											//returns a user array of all drivers
-	   for(int i = 0; i < uArray.length; i++){
-		   if(uArray[i].role() == false)								//if user == driver add to driverList
+	   driverList.clear();
+	   for(int i = 0; i < length; i++){
+		   if(uArray[i].role() == 2)								//if user == driver add to driverList
 			   addDriver(uArray[i]);
 	   }
 	   user[] list =  driverList.toArray(new user[driverList.size()]);		//convert to user array
@@ -63,8 +69,9 @@ public class userArray{
    }
    
    public user[] getPassengers(){										//returns a user array of all passengers
-	   for(int i = 0; i < uArray.length; i++){					
-		   if(uArray[i].role() == true)									//if user == passenger and to passengerList
+	   passengerList.clear();
+	   for(int i = 0; i < length; i++){					
+		   if(uArray[i].role() == 1)									//if user == passenger and to passengerList
 			   addPassenger(uArray[i]);
 	   }
 	   user[] list =  passengerList.toArray(new user[passengerList.size()]);		//convert to user array
