@@ -1,12 +1,14 @@
 package D5;
 
-public class user {
+import java.io.Serializable;
+
+public class user implements Serializable {
 	
 	private String name;
 	private int id;
 	private String password;
 	private double rating;
-	private int numRatings;
+	private double numRatings;
 	private String bio;
 	private Boolean isDriver;
 	private Boolean isPassenger;
@@ -70,23 +72,20 @@ public class user {
    }
 	
 	public double getRating(){
-		return rating;
+		return Math.floor(rating*10)/10;
 	}
 	
 	public void addRating(double newRating){
 		if (numRatings == 0){
 			rating = newRating;
-			numRatings++;
 		}
 		else if (numRatings == 1){
 			rating = (newRating + rating)/2;
-			numRatings++;
 		}
 		else {
-			rating = rating*((numRatings-1)/numRatings) + (newRating/numRatings);
-			numRatings++;
+			rating = (rating*(numRatings) + newRating)/(numRatings+1);
 		}
-
+		numRatings++;
 	}
 	
 	public String getBio(){
@@ -111,11 +110,6 @@ public class user {
       isDriver = false;
       isPassenger = false;
    }
-   
-	public void incNumRating()
-	{
-		this.numRatings++;
-	}
 	
 	//Returns True if Passenger or False if Driver, or null if neither
 	public int role(){

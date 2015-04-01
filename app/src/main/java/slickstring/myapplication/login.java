@@ -40,19 +40,21 @@ public class login extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void verifyLogin(View view){
+    public void verifyLogin(View view) {
         EditText email = (EditText) findViewById(R.id.emailInput);
         EditText password = (EditText) findViewById(R.id.passwordInput);
-        if (controller.loginButton(email.getText().toString(),password.getText().toString())){
+        if (controller.loginButton(email.getText().toString(), password.getText().toString())) {
+
+            ((TextView) findViewById(R.id.warningView)).setVisibility(View.INVISIBLE);              //make the invalid password warning disappear
+
             Bundle bundle = new Bundle();
             bundle.putSerializable(controller_key, controller);
 
             Intent intent = new Intent(this, create_bio.class);
             intent.putExtras(bundle);
             startActivity(intent);
-        }
-        else{
-            ((TextView) findViewById(R.id.warningView)).setText("Invalid username or password");
+        } else {
+            ((TextView) findViewById(R.id.warningView)).setVisibility(View.VISIBLE);                //shows the invalid password warning
         }
     }
 }

@@ -24,11 +24,7 @@ public class list_drivers extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_drivers);
         controller = (Control) getIntent().getSerializableExtra(controller_key);
-//        String[] drivers = controller.getDrivers();
-        String[] drivers = new String[3];
-        drivers[0] = "dave";
-        drivers[1] = "allison";
-        drivers[2] = "chuck";
+        String[] drivers = controller.getDrivers();
 
         for (String s: drivers){
             driverButtonCreator(s);
@@ -38,7 +34,7 @@ public class list_drivers extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_list_drivers, menu);
+        getMenuInflater().inflate(R.menu.menu_role_select, menu);
         return true;
     }
 
@@ -58,6 +54,10 @@ public class list_drivers extends Activity {
     }
 
     public void driverButtonCreator(final String driverName){
+        if (driverName == null){
+            return;
+        }
+
         final LinearLayout layout = (LinearLayout) findViewById(R.id.driverListLayout);
         final Button button = new Button(this);
         button.setText(driverName);

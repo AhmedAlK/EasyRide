@@ -72,6 +72,7 @@ public class Control implements Serializable {
 	public void logoutButton()
 	{
 		name.offline();
+		
 	}
 	public void userRating(double rating)
 	{
@@ -142,7 +143,7 @@ public class Control implements Serializable {
 		String[] passengerNames = new String[300];
 		int i = 0;
 		int j=0;
-		while(passengers[i] !=null){
+		while(i < passengers.length && passengers[i] != null  ){
 			if(passengers[i].findConvo(name) != null){
 				passengerNames[j] = passengers[i].getName();
 				j++;
@@ -156,8 +157,9 @@ public class Control implements Serializable {
 		user[] drivers = uArray.getDrivers();
 		int i = 0;
 		String[] driverNames = new String[300];
-		while(drivers[i] != null){
+		while(i < drivers.length && drivers[i] != null){
 			driverNames[i] = drivers[i].getName();
+			i++;
 		}
 		return driverNames;
 	}
@@ -166,8 +168,9 @@ public class Control implements Serializable {
 		user[] passengers = uArray.getPassengers();
 		int i = 0;
 		String[] passengerNames = new String[300];
-		while(passengers[i] != null){
+		while(i < passengers.length && passengers[i] != null){
 			passengerNames[i] = passengers[i].getName();
+			i++;
 		}
 		return passengerNames;
 	}
@@ -178,9 +181,7 @@ public class Control implements Serializable {
 		temp.setInvite(true);
 	}
 	
-	public void denyInvite(){										//denies an invite, call if you're a driver
-		name.setInvite(false);
-	}
+
 	
 	public void acceptInvite(String otherUser){					//accepts an invite, call if you're a driver
 		name.setInRide(true);
@@ -209,19 +210,29 @@ public class Control implements Serializable {
 	public double getRating() {
 		return name.getRating();
 	}
+	/*
+	 * Dont think we need setRating as userRating does the same thing
+	 */
+	/*
 	public void setRating(double rating) {
 		name.addRating(rating);
 	}
-	public String getUserName() {
-		return name.getName();
-	}
+	
 	public void setUserName(String userName) {
 		name.setName(userName);
 	}
-	public String getBio() {
-		return name.getBio();
-	}
 	public void setBio(String bio) {
 		name.setBio(bio);
+	}
+		public void denyInvite(){										//denies an invite, call if you're a driver
+		name.setInvite(false);
+	}
+	*/
+	public String getUserName() {
+		return name.getName();
+	}
+	
+	public String getBio() {
+		return name.getBio();
 	}
 }

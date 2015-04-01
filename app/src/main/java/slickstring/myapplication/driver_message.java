@@ -34,7 +34,7 @@ public class driver_message extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_driver_message, menu);
+        getMenuInflater().inflate(R.menu.menu_messages, menu);
         return true;
     }
 
@@ -59,7 +59,7 @@ public class driver_message extends Activity {
         alertDialog.setButton("cancel",new DialogInterface.OnClickListener(){
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                controller.denyInvite();
+                controller.cancelInvite(otherUser);
             }
         });
         alertDialog.setButton("accept",new DialogInterface.OnClickListener(){
@@ -73,11 +73,12 @@ public class driver_message extends Activity {
 
     public void sendMessage(View view){
         EditText editText = (EditText) findViewById(R.id.messageText);
-        controller.passengerSend(editText.getText().toString(),otherUser);
+        controller.driverSend(editText.getText().toString(),otherUser);
+        editText.setText("");
         refreshConversation();
     }
 
     public void refreshConversation(){
-        ((TextView) findViewById(R.id.conversationView)).setText(controller.printConvo(controller.getUserName(), otherUser));
+        ((TextView) findViewById(R.id.conversationView)).setText(controller.printConvo(otherUser, controller.getUserName()));
     }
 }

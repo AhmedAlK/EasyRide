@@ -12,11 +12,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Waiting..."
+        android:text="Waiting for requests..."
         android:id="@+id/waitingView"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:textColor="#ff54fdff" />
+        android:layout_centerHorizontal="true" />
 
     <ScrollView
         android:layout_width="wrap_content"

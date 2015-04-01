@@ -1,6 +1,8 @@
 package D5;
 
-public class message{
+import java.io.Serializable;
+
+public class message implements Serializable {
 	
 	private message next = null;
 	private message prev = null;

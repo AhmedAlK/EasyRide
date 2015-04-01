@@ -1,6 +1,8 @@
 package D5;
 
-public class fakeData{
+import java.io.Serializable;
+
+public class fakeData implements Serializable {
 	private user anne;
 	private user frank;
 	private user ahmed;
