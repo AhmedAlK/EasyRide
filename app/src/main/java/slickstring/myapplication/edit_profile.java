@@ -16,15 +16,20 @@ import D5.Control;
 
 public class edit_profile extends Activity {
 
-    public final static String controller_key = "slickstring.myapplication.controller";
-    public static Control controller;
+    public Control controller = login.controller;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
-        controller = (Control) getIntent().getSerializableExtra(controller_key);
-        ((EditText) findViewById(R.id.BioField)).setText(controller.getBio());
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        ((TextView) findViewById(R.id.userName)).setText(controller.getUserName());
+        ((TextView) findViewById(R.id.BioField)).setText(controller.getBio());
         ((RatingBar) findViewById(R.id.ratingBar)).setRating((float) controller.getRating());
     }
 
@@ -40,14 +45,12 @@ public class edit_profile extends Activity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        switch (item.getItemId()) {
+            case R.id.action_save:
+                controller.editBioButton(((EditText) findViewById(R.id.BioField)).getText().toString());
+                break;
         }
 
         return super.onOptionsItemSelected(item);
     }
-
 }

@@ -14,13 +14,12 @@ import D5.Control;
 public class role_select extends Activity {
 
     public final static String controller_key = "slickstring.myapplication.controller";
-    public static Control controller;
+    public Control controller = login.controller;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_role_select);
-        controller = (Control) getIntent().getSerializableExtra(controller_key);
     }
 
     @Override
@@ -42,7 +41,6 @@ public class role_select extends Activity {
             // Handle action bar item clicks here. The action bar will
             // automatically handle clicks on the Home/Up button, so long
             // as you specify a parent activity in AndroidManifest.xml.
-            int id = item.getItemId();
 
             switch (item.getItemId()) {
                 case R.id.action_profile:
@@ -53,33 +51,21 @@ public class role_select extends Activity {
         }
 
     public void openProfile(){
-        Bundle bundle = new Bundle();
-        bundle.putSerializable(controller_key, controller);
-
         Intent intent = new Intent(this, my_profile.class);
-        intent.putExtras(bundle);
         startActivity(intent);
     }
 
     public void amDriver(View view){
         controller.driverButton();
 
-        Bundle bundle = new Bundle();
-        bundle.putSerializable(controller_key, controller);
-
         Intent intent = new Intent(this, waiting.class);
-        intent.putExtras(bundle);
         startActivity(intent);
     }
 
     public void amPassenger(View view){
         controller.passengerButton();
 
-        Bundle bundle = new Bundle();
-        bundle.putSerializable(controller_key, controller);
-
         Intent intent = new Intent(this, list_drivers.class);
-        intent.putExtras(bundle);
         startActivity(intent);
     }
 }

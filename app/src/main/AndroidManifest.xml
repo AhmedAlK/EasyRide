@@ -21,7 +21,8 @@
             android:name=".login"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="EasyRide"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -32,7 +33,8 @@
             android:name=".create_bio"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_edit__bio"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" >
         </activity>
         <activity
             android:name=".role_select"
@@ -88,6 +90,10 @@
         <activity
             android:name=".my_profile"
             android:label="@string/title_activity_my_profile" >
+        </activity>
+        <activity
+            android:name=".riding"
+            android:label="@string/title_activity_riding" >
         </activity>
     </application>
 

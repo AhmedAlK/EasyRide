@@ -16,8 +16,8 @@ import D5.Control;
 
 public class login extends Activity {
 
-    public final static String controller_key = "slickstring.myapplication.controller";
     public static Control controller = new Control();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,11 +92,10 @@ public class login extends Activity {
 
             ((TextView) findViewById(R.id.warningView)).setVisibility(View.INVISIBLE);              //make the invalid password warning disappear
 
-            Bundle bundle = new Bundle();
-            bundle.putSerializable(controller_key, controller);
+
 
             Intent intent = new Intent(this, create_bio.class);
-            intent.putExtras(bundle);
+
             startActivity(intent);
         } else {
             ((TextView) findViewById(R.id.warningView)).setVisibility(View.VISIBLE);                //shows the invalid password warning

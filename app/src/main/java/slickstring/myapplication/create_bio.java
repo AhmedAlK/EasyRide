@@ -16,13 +16,12 @@ import D5.Control;
 public class create_bio extends Activity {
 
     public final static String controller_key = "slickstring.myapplication.controller";
-    public static Control controller;
+    public Control controller = login.controller;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_bio);
-        controller = (Control) getIntent().getSerializableExtra(controller_key);
         ((TextView) findViewById(R.id.userName)).setText(controller.getUserName());
     }
 

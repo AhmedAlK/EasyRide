@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="slickstring.myapplication.my_profile">
 
-    <item android:id="@+id/action_settings"
+    <item android:id="@+id/action_edit"
         android:title="edit"
         android:orderInCategory="100"
         android:showAsAction="ifRoom" />

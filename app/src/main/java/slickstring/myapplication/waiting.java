@@ -18,9 +18,8 @@ import static android.os.SystemClock.sleep;
 
 public class waiting extends Activity {
 
-    public final static String controller_key = "slickstring.myapplication.controller";
     public final static String message_key = "slickstring.myapplication.message";
-    public static Control controller;
+    public Control controller = login.controller;
     public static String[] messages;
     Handler handler = new Handler();
 
@@ -28,7 +27,6 @@ public class waiting extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_waiting);
-        controller = (Control) getIntent().getSerializableExtra(controller_key);
         messages = new String[0];
 
         //set up the automated refresh
@@ -58,11 +56,7 @@ public class waiting extends Activity {
     }
 
     public void openProfile(){
-        Bundle bundle = new Bundle();
-        bundle.putSerializable(controller_key, controller);
-
         Intent intent = new Intent(this, my_profile.class);
-        intent.putExtras(bundle);
         startActivity(intent);
     }
 
@@ -75,8 +69,8 @@ public class waiting extends Activity {
                     messagesButtonCreator(passengers[i]);
                 }
                 messages = passengers.clone();
-                handler.postDelayed(refresh,5000);
             }
+            handler.postDelayed(refresh,5000);
         }
     };
 
@@ -92,7 +86,6 @@ public class waiting extends Activity {
         button.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 Bundle bundle = new Bundle();
-                bundle.putSerializable(controller_key, controller);
                 bundle.putString(message_key,passengerName);
 
                 Intent intent = new Intent(layout.getContext(), driver_message.class);

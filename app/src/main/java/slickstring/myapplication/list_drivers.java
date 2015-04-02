@@ -15,15 +15,13 @@ import D5.Control;
 
 public class list_drivers extends Activity {
 
-    public final static String controller_key = "slickstring.myapplication.controller";
     public final static String message_key = "slickstring.myapplication.message";
-    public static Control controller;
+    public Control controller = login.controller;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_drivers);
-        controller = (Control) getIntent().getSerializableExtra(controller_key);
         String[] drivers = controller.getDrivers();
 
         for (String s: drivers){
@@ -55,7 +53,6 @@ public class list_drivers extends Activity {
 
     public void openProfile(){
         Bundle bundle = new Bundle();
-        bundle.putSerializable(controller_key, controller);
 
         Intent intent = new Intent(this, my_profile.class);
         intent.putExtras(bundle);
@@ -69,7 +66,6 @@ public class list_drivers extends Activity {
         button.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 Bundle bundle = new Bundle();
-                bundle.putSerializable(controller_key, controller);
                 bundle.putString(message_key,driverName);
 
                 Intent intent = new Intent(layout.getContext(), passenger_message.class);

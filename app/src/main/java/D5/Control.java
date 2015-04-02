@@ -74,7 +74,6 @@ public class Control implements Serializable {
 	public void passengerButton()
 	{
 		name.setPassenger();
-		fakeIt.fakePassenger(name.getName());
 	}
 	/*
 	 * Updates the users bio to the newBio.
@@ -105,6 +104,7 @@ public class Control implements Serializable {
 	{
 		if(newBio.equals(""))
 			newBio = "I have not set my bio!";
+		
 		name.setBio(newBio);
 	}
 		/*
@@ -206,6 +206,13 @@ public class Control implements Serializable {
 	}
 	
 	public void sendInvite(String otherUser){						//Sends an invite, takes the name of the driver
+		user temp = uArray.findUser(otherUser);
+		name.setInvite(true);
+		temp.setInvite(true);
+		fakeIt.fakePassenger(name.getName());
+	}
+	
+	public void fakeSendInvite(String otherUser){						//Sends an invite for a fake user, takes the name of the driver
 		user temp = uArray.findUser(otherUser);
 		name.setInvite(true);
 		temp.setInvite(true);

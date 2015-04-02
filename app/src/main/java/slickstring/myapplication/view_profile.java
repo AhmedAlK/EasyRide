@@ -16,7 +16,7 @@ public class view_profile extends Activity {
 
     public final static String controller_key = "slickstring.myapplication.controller";
     public final static String message_key = "slickstring.myapplication.message";
-    public static Control controller;
+    public Control controller = login.controller;
     public static String otherUser;
 
     @Override
@@ -24,13 +24,12 @@ public class view_profile extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_profile);
 
-        controller = (Control) getIntent().getSerializableExtra(controller_key);
         otherUser = getIntent().getStringExtra(message_key);
+    }
 
-
-        ((TextView) findViewById(R.id.BioField)).setText(controller.getBio());
-        ((TextView) findViewById(R.id.BioField)).setText(controller.getBio());
-        ((RatingBar) findViewById(R.id.ratingBar)).setRating((float) controller.getRating());
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
 
 
@@ -49,7 +48,7 @@ public class view_profile extends Activity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_edit) {
             return true;
         }
 

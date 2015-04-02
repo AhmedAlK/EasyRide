@@ -23,4 +23,5 @@
     <string name="title_activity_my_profile">My Profile</string>
 
     <string name="hello_world">Hello world!</string>
+    <string name="title_activity_riding">Riding</string>
 </resources>

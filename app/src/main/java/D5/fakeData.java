@@ -28,6 +28,12 @@ public class fakeData implements Serializable{
 		michelle.setName("Michelle");
 		brandon.setName("Brandon");
 		
+		anne.setPassword("Annee");
+		frank.setPassword("Franke");
+		ahmed.setPassword("Ahmede");
+		michelle.setPassword("Michellee");
+		brandon.setPassword("Brandone");
+		
 		anne.setBio("Hey I'm Anne");
 		frank.setBio("I like to drink");
 		ahmed.setBio("I'll drive you anywhere :)");
@@ -63,7 +69,7 @@ public class fakeData implements Serializable{
 	public void fakeDriver(String name){										//when you become a driver, they all message you
 		 anneC.passengerSend("Hey!", name);
 		 frankC.passengerSend("Watsup ;)", name);
-		 frankC.sendInvite(name);													//Frank likes you, wants you to drive him
+		 frankC.fakeSendInvite(name);													//Frank likes you, wants you to drive him
 	}	
 	
 	public void fakePassenger(String name){										//when you become a passenger, they will all accept to drive you
