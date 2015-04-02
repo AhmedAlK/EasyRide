@@ -9,12 +9,13 @@ import android.widget.EditText;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import D5.Control;
 
 
 public class view_profile extends Activity {
 
-    public final static String controller_key = "slickstring.myapplication.controller";
     public final static String message_key = "slickstring.myapplication.message";
     public Control controller = login.controller;
     public static String otherUser;
@@ -30,6 +31,10 @@ public class view_profile extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
+
+        ((TextView) findViewById(R.id.BioField)).setText(controller.findUser(otherUser).getBio());
+        ((TextView) findViewById(R.id.userName)).setText(controller.findUser(otherUser).getName());
+        ((RatingBar) findViewById(R.id.ratingBar)).setRating((float) controller.findUser(otherUser).getRating());
     }
 
 

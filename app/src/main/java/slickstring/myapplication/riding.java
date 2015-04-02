@@ -3,10 +3,12 @@ package slickstring.myapplication;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import D5.Control;
@@ -16,15 +18,22 @@ public class riding extends Activity {
 
     public final static String message_key = "slickstring.myapplication.message";
     public Control controller = login.controller;
-    public static String otherUser;
+    public String otherUser;
+
+    Handler handler = new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_riding);
         otherUser = getIntent().getStringExtra(message_key);
-        ((TextView) findViewById(R.id.conversationView)).setText(otherUser);
+        ((TextView) findViewById(R.id.conversationView)).setText(controller.printConvo(otherUser,controller.getUserName()));
+
+        //set up the automated refresh
+        handler.postDelayed(refresh, 1000);
     }
+
+
 
 
     @Override
@@ -47,24 +56,38 @@ public class riding extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void endRide() {
-        AlertDialog alertDialog = new AlertDialog.Builder(this).create();
-        alertDialog.setMessage(otherUser + " has requested a ride");
-        alertDialog.setButton(DialogInterface.BUTTON_NEGATIVE,"cancel",new DialogInterface.OnClickListener(){
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                controller.cancelInvite(otherUser);
-            }
-        });
-        alertDialog.setButton(DialogInterface.BUTTON_POSITIVE,"accept",new DialogInterface.OnClickListener(){
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                controller.acceptInvite(otherUser);
-                //rideAccepted();
-            }
-        });
-        alertDialog.show();
+    public void sendMessage(View view){
+        EditText editText = (EditText) findViewById(R.id.messageText);
+        if(controller.getUser().role() == 2){
+            controller.driverSend(editText.getText().toString(),otherUser);
+        }
+        else if (controller.getUser().role() == 1) {
+            controller.passengerSend(otherUser,editText.getText().toString());
+        }
+        editText.setText("");
+        refreshConversation();
     }
+
+    private void endRide() {
+        controller.endRide(otherUser);
+        finish();
+    }
+
+    public void refreshConversation(){
+        String serverConvo = controller.printConvo(otherUser, controller.getUserName());
+        String clientConvo = (String) ((TextView) findViewById(R.id.conversationView)).getText();
+        if (serverConvo != clientConvo) {
+            ((TextView) findViewById(R.id.conversationView)).setText(serverConvo);
+        }
+    }
+
+    public final Runnable refresh = new Runnable() {
+        @Override
+        public void run() {
+            refreshConversation();
+            handler.postDelayed(refresh, 1000);
+        }
+    };
 
     @Override
     public void onBackPressed() {

@@ -21,13 +21,19 @@ public class passenger_message extends Activity {
     public Control controller = login.controller;
     public static String otherUser;
     Handler handler = new Handler();
+    AlertDialog alertDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_passenger_message);
         otherUser = getIntent().getStringExtra(message_key);
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setAlert();
         //set up the automated refresh
         handler.postDelayed(refresh, 1000);
     }
@@ -61,8 +67,8 @@ public class passenger_message extends Activity {
         startActivity(intent);
     }
 
-    public void requestedRide(View view){
-        AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+    public void setAlert(){
+        alertDialog = new AlertDialog.Builder(this).create();
         alertDialog.setMessage("You have requested a ride");
         alertDialog.setButton(DialogInterface.BUTTON_NEGATIVE, "cancel",new DialogInterface.OnClickListener(){
             @Override
@@ -70,8 +76,6 @@ public class passenger_message extends Activity {
                 controller.cancelInvite(otherUser);
             }
         });
-        alertDialog.show();
-        controller.sendInvite(otherUser);
     }
 
     public void sendMessage(View view){
@@ -81,11 +85,23 @@ public class passenger_message extends Activity {
         refreshConversation();
     }
 
+    public void requestedRide(View view){
+        alertDialog.show();
+        controller.sendInvite(otherUser);
+    }
+
+    private void rideAccepted() {
+        handler.removeCallbacksAndMessages(null);
+        Intent intent = new Intent(this, riding.class);
+        intent.putExtra(message_key, otherUser);
+        startActivity(intent);
+    }
+
     public void refreshConversation(){
         String serverConvo = controller.printConvo(controller.getUserName(),otherUser);
         String clientConvo = (String) ((TextView) findViewById(R.id.conversationView)).getText();
         if (serverConvo != clientConvo) {
-            ((TextView) findViewById(R.id.conversationView)).setText(controller.printConvo(controller.getUserName(), otherUser));
+            ((TextView) findViewById(R.id.conversationView)).setText(serverConvo);
         }
     }
 
@@ -93,7 +109,13 @@ public class passenger_message extends Activity {
         @Override
         public void run() {
             refreshConversation();
-            handler.postDelayed(refresh,5000);
+            if (controller.checkInRideWith(otherUser)){
+                alertDialog.dismiss();
+                rideAccepted();
+            }
+            else{
+                handler.postDelayed(refresh,1000);
+            }
         }
     };
 }

@@ -20,8 +20,10 @@ public class driver_message extends Activity {
 
     public final static String message_key = "slickstring.myapplication.message";
     public Control controller = login.controller;
-    public static String otherUser;
+    public String otherUser;
     Handler handler = new Handler();
+    AlertDialog alertDialog;
+    boolean requestSent = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +31,12 @@ public class driver_message extends Activity {
         setContentView(R.layout.activity_driver_message);
         otherUser = getIntent().getStringExtra(message_key);
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setAlert();
         //set up the automated refresh
         handler.postDelayed(refresh, 1000);
     }
@@ -62,9 +70,10 @@ public class driver_message extends Activity {
         startActivity(intent);
     }
 
-    public void rideRequested(){
+    public void setAlert(){
+
+        alertDialog = new AlertDialog.Builder(this).create();
         final Context context = this;
-        AlertDialog alertDialog = new AlertDialog.Builder(this).create();
         alertDialog.setMessage(otherUser + " has requested a ride");
         alertDialog.setButton(DialogInterface.BUTTON_NEGATIVE,"cancel",new DialogInterface.OnClickListener(){
             @Override
@@ -79,12 +88,17 @@ public class driver_message extends Activity {
                 rideAccepted();
             }
         });
+    }
+
+    public void rideRequested(){
         alertDialog.show();
+        requestSent = true;
     }
 
     private void rideAccepted() {
+        handler.removeCallbacks(null);
         Intent intent = new Intent(this, riding.class);
-        intent.putExtra(otherUser, message_key);
+        intent.putExtra(message_key, otherUser);
         startActivity(intent);
     }
 
@@ -100,9 +114,6 @@ public class driver_message extends Activity {
         String clientConvo = (String) ((TextView) findViewById(R.id.conversationView)).getText();
         if (serverConvo != clientConvo) {
             ((TextView) findViewById(R.id.conversationView)).setText(serverConvo);
-            if (controller.checkForInvites()){
-                rideRequested();
-            }
         }
     }
 
@@ -110,7 +121,21 @@ public class driver_message extends Activity {
         @Override
         public void run() {
             refreshConversation();
-            handler.postDelayed(refresh,5000);
+
+            if (controller.checkForInvites(otherUser) && !requestSent){
+                rideRequested();
+            }
+            else if (!controller.checkForInvites(otherUser) && requestSent){
+                if (controller.checkInRideWith(otherUser)){
+                    rideAccepted();
+                }
+                else {
+                    alertDialog.dismiss();
+                }
+            }
+            else{
+                handler.postDelayed(refresh,1000);
+            }
         }
     };
 }

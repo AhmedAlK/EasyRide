@@ -1,8 +1,8 @@
 package D5;
 
-import java.io.Serializable;
 
-public class user implements Serializable{
+
+public class user{
 	
 	private String name;
 	private int id;
@@ -14,8 +14,10 @@ public class user implements Serializable{
 	private Boolean isPassenger;
 	private conversation[] convo;
 	private int numConvo = 0;
-	private boolean recieveInvite;
 	private boolean inRide;
+	private String[] invites;
+	private String inRideWith = "";
+	private int numInvites = 0;
 	
 	public user(){
 		name = "";
@@ -27,8 +29,8 @@ public class user implements Serializable{
 		isDriver = false;
 		isPassenger = false;
 		convo = new conversation[500];
-		recieveInvite = false;
 		inRide = false;
+		invites = new String[100];
 	}
 	
 	public String getPassword() {
@@ -43,14 +45,38 @@ public class user implements Serializable{
 		this.name = name;
 	}
 	
-	public void setInvite(boolean flag){
-		recieveInvite = flag;
+	public void addInvite(String passenger)
+	{
+		invites[numInvites] = passenger;
+		numInvites++;
 	}
-	
-	public boolean getInvite(){
-		return recieveInvite;
+	public void removeInvite(String passenger)
+	{
+		int counter = 0;
+		for(int i = 0; i < numInvites; i++)
+		{
+			if(invites[i].equals(passenger))
+			{
+				invites[i] = null;
+				counter = i;
+			}
+			
+		}
+		
+		while(counter < numInvites){
+			invites[counter] = invites[counter+1];
+			counter++;
+		}
+		numInvites--;
 	}
-	
+	public boolean findInvite(String passenger){
+		for(int i = 0; i < numInvites; i++)
+		{
+			if(invites[i] != null && invites[i].equals(passenger))
+				return true;
+		}
+		return false;
+	}
 	public void setInRide(boolean flag){
 		inRide = flag;
 	}
@@ -128,7 +154,7 @@ public class user implements Serializable{
 	
 	public conversation findConvo(user otherUser){
 		for(int i = 0; i < numConvo; i++){
-			if(convo[i].getDriver().getName().equals(otherUser.getName())){
+			if(convo[i] != null && convo[i].getDriver().getName().equals(otherUser.getName())){
 				return convo[i];
 			}
 		}
@@ -137,9 +163,17 @@ public class user implements Serializable{
 	
 	public void updateConvo(conversation updated, user otherUser){
 		for(int i = 0; i < numConvo; i++){
-			if(convo[i].getDriver().getName().equals(otherUser.getName())){
+			if(convo[i] != null && convo[i].getDriver().getName().equals(otherUser.getName())){
 				convo[i] = updated;
 			}
 		}
+	}
+
+	public String getInRideWith() {
+		return inRideWith;
+	}
+
+	public void setInRideWith(String inRideWith) {
+		this.inRideWith = inRideWith;
 	}
 }

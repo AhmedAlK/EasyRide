@@ -1,8 +1,8 @@
 package D5;
 
-import java.io.Serializable;
 
-public class conversation implements Serializable{
+
+public class conversation{
 	
 	private user driver;
 	private user passenger;

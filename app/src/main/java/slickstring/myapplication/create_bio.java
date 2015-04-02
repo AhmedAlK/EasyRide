@@ -52,11 +52,8 @@ public class create_bio extends Activity {
         String newBio = ((EditText) findViewById(R.id.BioField)).getText().toString();
         controller.firstNextButton(newBio);
 
-        Bundle bundle = new Bundle();
-        bundle.putSerializable(controller_key, controller);
 
         Intent intent = new Intent(this, role_select.class);
-        intent.putExtras(bundle);
         startActivity(intent);
     }
 }

@@ -1,9 +1,9 @@
 package D5;
 
-import java.io.Serializable;
 
-@SuppressWarnings("serial")
-public class Control implements Serializable {
+
+
+public class Control {
 
 	private user name;
 	public userArray uArray;						//creates an array in this control instead of having an array on the server
@@ -49,6 +49,7 @@ public class Control implements Serializable {
 		return passCheck;
 		
 	}
+	
 	/*
 	 * Tests to see if the password entered matches the password the user has saved to there account.
 	 */
@@ -143,10 +144,22 @@ public class Control implements Serializable {
 		return printConvo(passenger, name.getName());
 	}
 
-	public String printConvo(String passenger, String driver)					//returns a string with all the messages in a conversation
+	public String printConvo(String user1, String user2)					//returns a string with all the messages in a conversation
 	{
-		user tempPassenger = uArray.findUser(passenger);
-		user tempDriver = uArray.findUser(driver);
+		user tempPassenger;
+		user tempDriver;
+		user temp1 = uArray.findUser(user1);                               //used for figuring out who the driver and who the passenger is
+		user temp2 = uArray.findUser(user2);
+		if(temp1.role() == 1)
+		{
+			tempPassenger = temp1;
+			tempDriver = temp2;
+		}
+		else
+		{
+			tempPassenger = temp2;
+			tempDriver = temp1;
+		}
 		conversation tempConvo = tempPassenger.findConvo(tempDriver);
 		message fullConvo = null;
 		if(tempConvo != null)
@@ -207,41 +220,59 @@ public class Control implements Serializable {
 	
 	public void sendInvite(String otherUser){						//Sends an invite, takes the name of the driver
 		user temp = uArray.findUser(otherUser);
-		name.setInvite(true);
-		temp.setInvite(true);
+		temp.addInvite(name.getName());
+	
 		fakeIt.fakePassenger(name.getName());
 	}
 	
 	public void fakeSendInvite(String otherUser){						//Sends an invite for a fake user, takes the name of the driver
 		user temp = uArray.findUser(otherUser);
-		name.setInvite(true);
-		temp.setInvite(true);
+		temp.addInvite(name.getName());
+		
 	}
 	
-	public boolean checkForInvites(){
-		return name.getInvite();
+	public boolean checkForInvites(String passenger){
+		
+		return name.findInvite(passenger);
 	}
 	
-	public void acceptInvite(String otherUser){					//accepts an invite, call if you're a driver
+	public void acceptInvite(String passenger){					//accepts an invite, call if you're a driver
 		name.setInRide(true);
-		name.setInvite(false);
-		user temp = uArray.findUser(otherUser);
+		
+		user temp = uArray.findUser(passenger);
+		name.removeInvite(passenger);
+		temp.setInRideWith(name.getName());
+		name.setInRideWith(passenger);
 		temp.setInRide(true);
 	}
 	
 	public void cancelInvite(String otherUser){						//cancels an invite, call if you're a passenger
 		user temp = uArray.findUser(otherUser);
-		name.setInvite(false);
-		temp.setInvite(false);
+		if(temp.role()==1)
+			name.removeInvite(otherUser);
+		else
+			temp.removeInvite(name.getName());
 	}
-	
+	public boolean checkInRideWith(String otherUser)
+	{
+		
+		if(otherUser.equals(name.getInRideWith()))
+				return true;
+		
+		return false;
+	}
 	public void endRide(String otherUser){
 		user temp = uArray.findUser(otherUser);
 		name.setInRide(false);
 		temp.setInRide(false);
 		fakeIt.fakeEndRide(name);
+		temp.setInRideWith("");
+		name.setInRideWith("");
 	}
-	
+	public user findUser(String name)
+	{
+		return uArray.findUser(name);
+	}
 	public user getUser()
 	{
 		return name;

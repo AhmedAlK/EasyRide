@@ -1,8 +1,8 @@
 package D5;
 
-import java.io.Serializable;
 
-public class fakeData implements Serializable{
+
+public class fakeData{
 	private user anne;
 	private user frank;
 	private user ahmed;
@@ -73,15 +73,15 @@ public class fakeData implements Serializable{
 	}	
 	
 	public void fakePassenger(String name){										//when you become a passenger, they will all accept to drive you
-		if(ahmed.getInvite() == true){
+		if(ahmed.findInvite(name) == true){
 			ahmedC.acceptInvite(name);
 		}
 		
-		if(michelle.getInvite() == true){
+		if(michelle.findInvite(name) == true){
 			michelleC.acceptInvite(name);
 		}
 		
-		if(brandon.getInvite() == true){
+		if(brandon.findInvite(name) == true){
 			brandonC.acceptInvite(name);
 		}
 	}
