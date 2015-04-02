@@ -2,7 +2,7 @@ package D5;
 
 import java.io.Serializable;
 
-public class user implements Serializable {
+public class user implements Serializable{
 	
 	private String name;
 	private int id;

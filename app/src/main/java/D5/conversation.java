@@ -2,7 +2,7 @@ package D5;
 
 import java.io.Serializable;
 
-public class conversation implements Serializable {
+public class conversation implements Serializable{
 	
 	private user driver;
 	private user passenger;

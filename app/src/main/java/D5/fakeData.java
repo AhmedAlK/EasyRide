@@ -2,7 +2,7 @@ package D5;
 
 import java.io.Serializable;
 
-public class fakeData implements Serializable {
+public class fakeData implements Serializable{
 	private user anne;
 	private user frank;
 	private user ahmed;

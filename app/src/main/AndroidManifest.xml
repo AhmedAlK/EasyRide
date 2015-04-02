@@ -4,13 +4,13 @@
 
     <uses-sdk android:minSdkVersion="15" />
 
-    <!--<android:uses-permission-->
-        <!--android:name="android.permission.WRITE_EXTERNAL_STORAGE"-->
-        <!--android:maxSdkVersion="18" />-->
-    <!--<android:uses-permission android:name="android.permission.READ_PHONE_STATE" />-->
-    <!--<android:uses-permission-->
-        <!--android:name="android.permission.READ_EXTERNAL_STORAGE"-->
-        <!--android:maxSdkVersion="18" />-->
+    <android:uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="18" />
+    <android:uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <android:uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="18" />
 
     <application
         android:allowBackup="true"
@@ -21,44 +21,41 @@
             android:name=".login"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="EasyRide"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".create_bio"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_edit__bio"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
         </activity>
-
         <activity
             android:name=".role_select"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="Select role"
             android:parentActivityName=".login"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
         </activity>
-
         <activity
             android:name=".waiting"
             android:label="Requests"
             android:parentActivityName=".role_select"
             android:screenOrientation="portrait" >
-            <!--<meta-data-->
-                <!--android:name="android.support.PARENT_ACTIVITY"-->
-                <!--android:value="slickstring.myapplication.role_select" />-->
-        </activity>
 
+            <!-- <meta-data -->
+            <!-- android:name="android.support.PARENT_ACTIVITY" -->
+            <!-- android:value="slickstring.myapplication.role_select" /> -->
+        </activity>
         <activity
             android:name=".edit_profile"
             android:label="@string/title_activity_edit_profile"
             android:screenOrientation="portrait" >
         </activity>
-
         <activity
             android:name=".list_drivers"
             android:label="@string/title_activity_list_drivers"
@@ -68,13 +65,12 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="slickstring.myapplication.role_select" />
         </activity>
-
-        <activity android:name=".driver_message"
+        <activity
+            android:name=".driver_message"
             android:label="Message"
             android:parentActivityName=".list_drivers"
             android:screenOrientation="portrait" >
         </activity>
-
         <activity
             android:name=".passenger_message"
             android:label="Message"
@@ -84,11 +80,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="slickstring.myapplication.list_drivers" />
         </activity>
-
         <activity
             android:name=".view_profile"
             android:label="@string/title_activity_view_profile"
             android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".my_profile"
+            android:label="@string/title_activity_my_profile" >
         </activity>
     </application>
 

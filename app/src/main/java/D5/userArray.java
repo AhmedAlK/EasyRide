@@ -3,7 +3,7 @@ package D5;
 import java.io.Serializable;
 import java.util.*;
 
-public class userArray implements Serializable {
+public class userArray implements Serializable{
 
    private user[] uArray = new user[500];         //Array of 500 because this app won't go live
    private List<user> driverList = new ArrayList<user>();      //ArrayList for drivers because it's easier

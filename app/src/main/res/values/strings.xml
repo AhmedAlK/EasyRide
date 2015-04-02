@@ -20,4 +20,7 @@
     <string name="title_activity_passenger_message">Passenger Message</string>
     <string name="title_activity_view_profile">View Profile</string>
     <string name="action_otherUser">Bio</string>
+    <string name="title_activity_my_profile">My Profile</string>
+
+    <string name="hello_world">Hello world!</string>
 </resources>

@@ -51,7 +51,7 @@ public class create_bio extends Activity {
 
     public void next(){
         String newBio = ((EditText) findViewById(R.id.BioField)).getText().toString();
-        controller.editBioButton(newBio);
+        controller.firstNextButton(newBio);
 
         Bundle bundle = new Bundle();
         bundle.putSerializable(controller_key, controller);

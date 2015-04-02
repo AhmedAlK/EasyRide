@@ -45,19 +45,24 @@ public class list_drivers extends Activity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        switch (item.getItemId()) {
+            case R.id.action_profile:
+                openProfile();
         }
-
         return super.onOptionsItemSelected(item);
     }
 
-    public void driverButtonCreator(final String driverName){
-        if (driverName == null){
-            return;
-        }
 
+    public void openProfile(){
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(controller_key, controller);
+
+        Intent intent = new Intent(this, my_profile.class);
+        intent.putExtras(bundle);
+        startActivity(intent);
+    }
+
+    public void driverButtonCreator(final String driverName){
         final LinearLayout layout = (LinearLayout) findViewById(R.id.driverListLayout);
         final Button button = new Button(this);
         button.setText(driverName);

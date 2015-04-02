@@ -24,6 +24,12 @@ public class role_select extends Activity {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        controller.logoutButton();
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_role_select, menu);
@@ -50,7 +56,7 @@ public class role_select extends Activity {
         Bundle bundle = new Bundle();
         bundle.putSerializable(controller_key, controller);
 
-        Intent intent = new Intent(this, edit_profile.class);
+        Intent intent = new Intent(this, my_profile.class);
         intent.putExtras(bundle);
         startActivity(intent);
     }

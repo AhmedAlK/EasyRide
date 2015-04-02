@@ -61,7 +61,7 @@ public class waiting extends Activity {
         Bundle bundle = new Bundle();
         bundle.putSerializable(controller_key, controller);
 
-        Intent intent = new Intent(this, edit_profile.class);
+        Intent intent = new Intent(this, my_profile.class);
         intent.putExtras(bundle);
         startActivity(intent);
     }
