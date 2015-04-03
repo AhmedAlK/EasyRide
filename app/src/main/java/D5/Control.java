@@ -247,7 +247,7 @@ public class Control {
 	}
 	
 	public void cancelInvite(String otherUser){						//cancels an invite, call if you're a passenger
-		user temp = uArray.findUser(otherUser);
+		user temp = findUser(otherUser);
 		if(temp.role()==1)
 			name.removeInvite(otherUser);
 		else
@@ -280,25 +280,7 @@ public class Control {
 	public double getRating() {
 		return name.getRating();
 	}
-	/*
-	 * Dont think we need setRating as userRating does the same thing
-	 * also as far as i can tell the other commands are unused as well
-	 */
-	/*
-	public void setRating(double rating) {
-		name.addRating(rating);
-	}
-	
-	public void setUserName(String userName) {
-		name.setName(userName);
-	}
-	public void setBio(String bio) {
-		name.setBio(bio);
-	}
-		public void denyInvite(){										//denies an invite, call if you're a driver
-		name.setInvite(false);
-	}
-	*/
+
 	public String getUserName() {
 		return name.getName();
 	}

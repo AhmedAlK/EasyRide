@@ -71,9 +71,7 @@ public class driver_message extends Activity {
     }
 
     public void setAlert(){
-
         alertDialog = new AlertDialog.Builder(this).create();
-        final Context context = this;
         alertDialog.setMessage(otherUser + " has requested a ride");
         alertDialog.setButton(DialogInterface.BUTTON_NEGATIVE,"cancel",new DialogInterface.OnClickListener(){
             @Override
@@ -89,19 +87,6 @@ public class driver_message extends Activity {
             }
         });
     }
-
-    public void rideRequested(){
-        alertDialog.show();
-        requestSent = true;
-    }
-
-    private void rideAccepted() {
-        handler.removeCallbacks(null);
-        Intent intent = new Intent(this, riding.class);
-        intent.putExtra(message_key, otherUser);
-        startActivity(intent);
-    }
-
     public void sendMessage(View view){
         EditText editText = (EditText) findViewById(R.id.messageText);
         controller.driverSend(editText.getText().toString(),otherUser);
@@ -109,10 +94,24 @@ public class driver_message extends Activity {
         refreshConversation();
     }
 
+    public void rideRequested(){
+        alertDialog.show();
+        requestSent = true;
+    }
+
+    private void rideAccepted() {
+        alertDialog.dismiss();
+        requestSent=false;
+        handler.removeCallbacks(null);
+        Intent intent = new Intent(this, riding.class);
+        intent.putExtra(message_key, otherUser);
+        startActivity(intent);
+    }
+
     public void refreshConversation(){
         String serverConvo = controller.printConvo(otherUser, controller.getUserName());
         String clientConvo = (String) ((TextView) findViewById(R.id.conversationView)).getText();
-        if (serverConvo != clientConvo) {
+        if (!serverConvo.equals(clientConvo)) {
             ((TextView) findViewById(R.id.conversationView)).setText(serverConvo);
         }
     }
@@ -122,16 +121,15 @@ public class driver_message extends Activity {
         public void run() {
             refreshConversation();
 
-            if (controller.checkForInvites(otherUser) && !requestSent){
+            if (controller.checkInRideWith(otherUser)){
+                rideAccepted();
+            }
+            else if (controller.checkForInvites(otherUser) && !requestSent){
                 rideRequested();
             }
             else if (!controller.checkForInvites(otherUser) && requestSent){
-                if (controller.checkInRideWith(otherUser)){
-                    rideAccepted();
-                }
-                else {
-                    alertDialog.dismiss();
-                }
+                requestSent = false;
+                alertDialog.dismiss();
             }
             else{
                 handler.postDelayed(refresh,1000);

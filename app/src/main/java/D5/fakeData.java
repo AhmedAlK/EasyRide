@@ -13,6 +13,7 @@ public class fakeData{
 	private Control ahmedC;
 	private Control michelleC;
 	private Control brandonC;
+	private boolean sentInvite;
 	
 	
 	public fakeData(userArray uArray){
@@ -64,12 +65,17 @@ public class fakeData{
 		michelleC.loginButton(michelle.getName(), "");
 		brandonC.loginButton(brandon.getName(), "");
 		
+		sentInvite = false;
+		
 	}
 	
 	public void fakeDriver(String name){										//when you become a driver, they all message you
 		 anneC.passengerSend("Hey!", name);
 		 frankC.passengerSend("Watsup ;)", name);
-		 frankC.fakeSendInvite(name);													//Frank likes you, wants you to drive him
+		 if(sentInvite == false){
+			frankC.fakeSendInvite(name);													//Frank likes you, wants you to drive him
+			sentInvite = true;
+		 }
 	}	
 	
 	public void fakePassenger(String name){										//when you become a passenger, they will all accept to drive you

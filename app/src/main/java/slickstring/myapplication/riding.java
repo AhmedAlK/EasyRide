@@ -3,6 +3,7 @@ package slickstring.myapplication;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Menu;
@@ -33,9 +34,6 @@ public class riding extends Activity {
         handler.postDelayed(refresh, 1000);
     }
 
-
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -58,18 +56,19 @@ public class riding extends Activity {
 
     public void sendMessage(View view){
         EditText editText = (EditText) findViewById(R.id.messageText);
-        if(controller.getUser().role() == 2){
-            controller.driverSend(editText.getText().toString(),otherUser);
-        }
-        else if (controller.getUser().role() == 1) {
-            controller.passengerSend(otherUser,editText.getText().toString());
-        }
+        controller.passengerSend(otherUser,editText.getText().toString());
+
         editText.setText("");
         refreshConversation();
     }
 
     private void endRide() {
         controller.endRide(otherUser);
+
+        Intent intent = new Intent(this, rate.class);
+        intent.putExtra(message_key,otherUser);
+        startActivity(intent);
+
         finish();
     }
 

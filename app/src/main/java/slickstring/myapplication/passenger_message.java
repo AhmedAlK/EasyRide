@@ -22,6 +22,7 @@ public class passenger_message extends Activity {
     public static String otherUser;
     Handler handler = new Handler();
     AlertDialog alertDialog;
+    boolean requestSent = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,10 +89,13 @@ public class passenger_message extends Activity {
     public void requestedRide(View view){
         alertDialog.show();
         controller.sendInvite(otherUser);
+        requestSent = true;
     }
 
     private void rideAccepted() {
-        handler.removeCallbacksAndMessages(null);
+        alertDialog.dismiss();
+        requestSent = false;
+        handler.removeCallbacks(null);
         Intent intent = new Intent(this, riding.class);
         intent.putExtra(message_key, otherUser);
         startActivity(intent);
@@ -100,7 +104,7 @@ public class passenger_message extends Activity {
     public void refreshConversation(){
         String serverConvo = controller.printConvo(controller.getUserName(),otherUser);
         String clientConvo = (String) ((TextView) findViewById(R.id.conversationView)).getText();
-        if (serverConvo != clientConvo) {
+        if (!serverConvo.equals(clientConvo)) {
             ((TextView) findViewById(R.id.conversationView)).setText(serverConvo);
         }
     }
@@ -109,11 +113,15 @@ public class passenger_message extends Activity {
         @Override
         public void run() {
             refreshConversation();
-            if (controller.checkInRideWith(otherUser)){
-                alertDialog.dismiss();
+
+            if (requestSent && controller.checkInRideWith(otherUser)){
                 rideAccepted();
             }
-            else{
+            else if (requestSent && !controller.findUser(otherUser).findInvite(controller.getUserName())){
+                requestSent = false;
+                alertDialog.dismiss();
+            }
+            else {
                 handler.postDelayed(refresh,1000);
             }
         }

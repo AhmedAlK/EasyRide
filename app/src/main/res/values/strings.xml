@@ -24,4 +24,5 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_riding">Riding</string>
+    <string name="title_activity_rate">Rate Them</string>
 </resources>

@@ -28,9 +28,19 @@ public class waiting extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_waiting);
         messages = new String[0];
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
         //set up the automated refresh
         handler.postDelayed(refresh,1000);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        handler.removeCallbacksAndMessages(null);
     }
 
     @Override
