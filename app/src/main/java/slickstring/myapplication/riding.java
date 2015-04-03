@@ -56,8 +56,12 @@ public class riding extends Activity {
 
     public void sendMessage(View view){
         EditText editText = (EditText) findViewById(R.id.messageText);
-        controller.passengerSend(otherUser,editText.getText().toString());
-
+        if (controller.getUser().role() == 1) {
+            controller.passengerSend(editText.getText().toString(), otherUser);
+        }
+        else{
+            controller.driverSend(editText.getText().toString(), otherUser);
+        }
         editText.setText("");
         refreshConversation();
     }
